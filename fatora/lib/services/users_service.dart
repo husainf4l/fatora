@@ -14,6 +14,7 @@ class UsersService {
     required String lastName,
   }) async {
     try {
+      print('Sending user creation request to: $_baseUrl/users');
       final response = await http.post(
         Uri.parse('$_baseUrl/users'),
         headers: {'Content-Type': 'application/json'},
@@ -25,17 +26,26 @@ class UsersService {
         }),
       );
 
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
       if (response.statusCode == 201) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        return User.fromJson(data);
+
+        // Extract the access token
+        final String accessToken = data['access_token'];
+
+        // Extract the user data
+        final Map<String, dynamic> userData = data['user'];
+
+        // Create a user object with the access token
+        return User.fromJson({...userData, 'accessToken': accessToken});
       } else {
         _handleError(response);
         throw Exception('Failed to create user');
       }
     } catch (e) {
       print('Error creating user: ${e.toString()}');
-      // Handle any other errors that may occur
-      // This could be network issues, JSON parsing errors, etc.
       throw Exception('Error creating user: ${e.toString()}');
     }
   }

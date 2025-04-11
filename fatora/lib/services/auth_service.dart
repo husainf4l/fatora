@@ -35,7 +35,7 @@ class AuthService {
       final user = User.fromJson(data['user']);
 
       // Save token and user data
-      await _saveAuthData(data['token'], user);
+      await _saveAuthData(data['access_token'], user);
 
       return user;
     } else {
@@ -59,7 +59,7 @@ class AuthService {
       final user = User.fromJson(data['user']);
 
       // Save token and user data
-      await _saveAuthData(data['token'], user);
+      await _saveAuthData(data['access_token'], user);
 
       return user;
     } else {
