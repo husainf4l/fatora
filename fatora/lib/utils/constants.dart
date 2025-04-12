@@ -4,7 +4,7 @@ class ApiConstants {
   //static const String baseUrl = 'http://localhost:3000/api';
 
   // For testing on a real device (replace with your computer's local IP):
-  static const String baseUrl = 'http://192.168.1.246:3000';
+  static const String baseUrl = 'http://192.168.0.167:3000';
 
   // For production:
   // static const String baseUrl = 'https://api.yourproduction.com/api';
